@@ -1,0 +1,29 @@
+{
+  "name": "scrape_with_mongoose",
+  "version": "1.0.0",
+  "description": "### A web app that lets users view and leave comments on the latest news.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/skbiswas1975/Scrape_With_Mongoose.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/skbiswas1975/Scrape_With_Mongoose/issues"
+  },
+  "homepage": "https://github.com/skbiswas1975/Scrape_With_Mongoose#readme",
+  "dependencies": {
+    "cheerio": "^1.0.0-rc.3",
+    "express": "^4.17.1",
+    "express-handlebars": "^3.1.0",
+    "install": "^0.13.0",
+    "mongoose": "^5.8.9",
+    "morgan": "^1.9.1",
+    "request": "^2.88.0"
+  }
+}
