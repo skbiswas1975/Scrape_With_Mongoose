@@ -35,15 +35,15 @@ app.engine(
 app.set("view engine", "handlebars");
 
 // If deployed, use the deployed database. Otherwise use the local mongoHeadlines database
-/* var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines";
+var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines";
 
 // Set mongoose to leverage built in JavaScript ES6 Promises
 // Connect to the Mongo DB
 mongoose.Promise = Promise;
-mongoose.connect(MONGODB_URI); */
-var MONGODB_URI = process.env.MONGODB_URI || "mongodb://user:password123@ds257848.mlab.com:57848/heroku_rzc7k62f";
+mongoose.connect(MONGODB_URI);
+/* var MONGODB_URI = process.env.MONGODB_URI || "mongodb://user:password123@ds257848.mlab.com:57848/heroku_rzc7k62f";
 
-mongoose.connect(MONGODB_URI,{  useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true});
+mongoose.connect(MONGODB_URI,{  useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true}); */
 
 var results = [];
 
