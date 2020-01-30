@@ -41,7 +41,7 @@ app.set("view engine", "handlebars");
 // Connect to the Mongo DB
 // mongoose.Promise = Promise;
 // mongoose.connect(MONGODB_URI);
-var MONGODB_URI = process.env.MONGODB_URI || "mongodb://<dbuser>:<dbpassword>@ds117145.mlab.com:17145/heroku_z8mn8k1z";
+var MONGODB_URI = process.env.MONGODB_URI || "mongodb://biswas:testing123@ds117145.mlab.com:17145/heroku_z8mn8k1z";
 
 mongoose.connect(MONGODB_URI,{  useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true});
 
