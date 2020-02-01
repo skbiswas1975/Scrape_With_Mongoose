@@ -35,12 +35,13 @@ app.engine(
 app.set("view engine", "handlebars");
 
 // If deployed, use the deployed database. Otherwise use the local mongoHeadlines database
-// var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines";
+/* var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines";
 
 // Set mongoose to leverage built in JavaScript ES6 Promises
 // Connect to the Mongo DB
-// mongoose.Promise = Promise;
-// mongoose.connect(MONGODB_URI);
+mongoose.Promise = Promise;
+mongoose.connect(MONGODB_URI, {useNewUrlParser: true}); */
+
 var MONGODB_URI = process.env.MONGODB_URI || "mongodb://biswas:testing123@ds117145.mlab.com:17145/heroku_z8mn8k1z";
 
 mongoose.connect(MONGODB_URI,{  useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true});
@@ -95,9 +96,9 @@ app.get("/scrape", function(req, res) {
 // Route for getting all Articles from the db
 app.get("/saved", function(req, res) {
   // Grab every document in the Articles collection
-  db.Article.find({})
+  db.Article.find({}).lean()
     .then(function(dbArticle) {
-      console.log(dbArticle);
+      console.log('dbArticle: ', dbArticle);
       res.render("saved", {
         saved: dbArticle
       });
