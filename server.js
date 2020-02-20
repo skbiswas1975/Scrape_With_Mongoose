@@ -4,26 +4,26 @@ var logger = require("morgan");
 var mongoose = require("mongoose");
 var exphbs = require("express-handlebars");
 
-// Our scraping tools
+
 var request = require("request");
 var cheerio = require("cheerio");
 
-// Require all models
+
 var db = require("./models");
 
 var PORT =  process.env.PORT || 3000;
 
-// Initialize Express
+
 var app = express();
 
-// Configure middleware
 
-// Use morgan logger for logging requests
+
+
 app.use(logger("dev"));
-// Use body-parser for handling form submissions
+
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-// Use express.static to serve the public folder as a static directory
+
 app.use(express.static("public"));
 
 app.engine(
@@ -34,11 +34,7 @@ app.engine(
 );
 app.set("view engine", "handlebars");
 
-// If deployed, use the deployed database. Otherwise use the local mongoHeadlines database
-/* var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines";
 
-// Set mongoose to leverage built in JavaScript ES6 Promises
-// Connect to the Mongo DB
 mongoose.Promise = Promise;
 mongoose.connect(MONGODB_URI, {useNewUrlParser: true}); */
 
@@ -48,13 +44,13 @@ mongoose.connect(MONGODB_URI,{  useNewUrlParser: true, useUnifiedTopology: true,
 
 var results = [];
 
-// Routes
+
 
 app.get("/", function(req, res) {
     res.render("index");
 });
 
-// A GET route for scraping the Daily Universe website
+
 app.get("/scrape", function(req, res) {
   var found;
   var titleArr = [];
@@ -68,16 +64,15 @@ app.get("/scrape", function(req, res) {
     if (!error && response.statusCode == 200) {
         // console.log(html);
       }
-    // Then, we load that into cheerio and save it to $ for a shorthand selector
+    
     var $ = cheerio.load(html, {
       xml: {
         normalizeWhitespace: true,
       }
     })
     $("body h3").each(function(i, element) {
-      // Save an empty result object
+      
       var result = {};
-      // Add the text and href of every link, and save them as properties of the result object
       result.title = $(element).children("a").text();
       found = titleArr.includes(result.title);
       result.link = $(element).children("a").attr("href");
@@ -93,9 +88,7 @@ app.get("/scrape", function(req, res) {
 });
 });
 
-// Route for getting all Articles from the db
 app.get("/saved", function(req, res) {
-  // Grab every document in the Articles collection
   db.Article.find({}).lean()
     .then(function(dbArticle) {
       console.log('dbArticle: ', dbArticle);
@@ -104,12 +97,9 @@ app.get("/saved", function(req, res) {
       });
     })
     .catch(function(err) {
-      // If an error occurred, send it to the client
       res.json(err);
     });
 });
-
-// Route for creating an Article in the db
 app.post("/api/saved", function(req, res) {
   db.Article.create(req.body)
     .then(function(dbArticle) {
