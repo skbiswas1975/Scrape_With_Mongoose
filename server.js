@@ -10,20 +10,15 @@ var cheerio = require("cheerio");
 
 
 var db = require("./models");
-
 var PORT =  process.env.PORT || 3000;
-
-
 var app = express();
 
 
 
 
 app.use(logger("dev"));
-
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-
 app.use(express.static("public"));
 
 app.engine(
@@ -39,7 +34,6 @@ mongoose.Promise = Promise;
 mongoose.connect(MONGODB_URI, {useNewUrlParser: true}); */
 
 var MONGODB_URI = process.env.MONGODB_URI || "mongodb://biswas:testing123@ds117145.mlab.com:17145/heroku_z8mn8k1z";
-
 mongoose.connect(MONGODB_URI,{  useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true});
 
 var results = [];
